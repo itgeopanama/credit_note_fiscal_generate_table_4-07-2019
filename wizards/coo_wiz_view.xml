@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<record id="coo_wiz_form_view" model="ir.ui.view">
+            <field name="name">coo.wiz.form.view</field>
+            <field name="model">coo.wiz</field>
+            <field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="coo"/>
+						<field name="invoice_id" invisible="1"/>
+					</group>
+					<footer>
+						<button class="oe_highlight" type="object" name="process" string="Add"/>
+						<button special="cancel" class="oe_link" string="cancel"/>
+					</footer>
+				</form>
+            </field>
+        </record>
+    </data>
+</odoo>
