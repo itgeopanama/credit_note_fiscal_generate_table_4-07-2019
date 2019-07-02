@@ -15,14 +15,16 @@ class AccountInvoice(models.Model):
 	
 	@api.multi
 	def write(self, vals):
-		if vals.get('coo'):
+		if vals.get('coo') and self.type in ['out_refund']:
 			self.fiscal_header.write({'coo': vals.get('coo')})
 			
 		return super(AccountInvoice, self).write(vals)
 		
 	@api.multi
 	def action_invoice_open(self):
-		if self._context.get('skip') or self.type in ['out_invoice', 'in_invoice']:
+		_logger.info(self._context)
+		_logger.info(self.type)
+		if self._context.get('skip') or self.type not in ['out_refund']:
 			return super(AccountInvoice, self).action_invoice_open()
 		else:
 			dummy, view_id = self.env['ir.model.data'].get_object_reference('credit_note_fiscal_generate_table', 'coo_wiz_form_view')
